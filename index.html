@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alsharek | المواسير البلاستيكية وملحقاتها</title>
+    <!-- تضمين مكتبة Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- تم ربط ملف site.css هنا بناءً على طلبك -->
+    <link rel="stylesheet" href="site.css"> 
+    
+    <!-- تضمين أيقونات Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <script>
+        // تعريف الألوان المخصصة في إعدادات Tailwind
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sharek-green': '#008000',
+                        'sharek-dark': '#004d00',
+                        'sharek-light': '#34D399',
+                        'primary-text': '#1F2937',
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- 1. شريط التنقل (Navbar) - متجاوب مع قائمة منسدلة (Dropdown) -->
+    <nav id="navbar" class="fixed-navbar fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- الشعار -->
+                <div class="flex items-center">
+                    <a href="#home" class="flex-shrink-0">
+                        <!-- استخدام الصورة المرفوعة مع كلاسات Tailwind لضمان التجاوب -->
+                        <img class="h-12 w-auto rounded-lg shadow-md" 
+                             src="images/logo.jpg" 
+                             onerror="this.onerror=null;this.src='https://placehold.co/150x50/008000/FFFFFF?text=Alsharek+Logo';" 
+                             alt="شعار شركة الشريك">
+                    </a>
+                </div>
+
+                <!-- روابط التنقل الرئيسية (لشاشات الكمبيوتر) -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4 space-x-reverse">
+                        <a href="#home" class="text-primary-text hover:text-sharek-green px-3 py-2 rounded-md text-base font-medium transition duration-150">الرئيسية</a>
+                        
+                        <!-- القائمة المنسدلة: عن الشركة -->
+                        <div class="relative group" id="about-dropdown-toggle">
+                            <!-- جعل النص رابطاً يؤدي إلى قسم 'من نحن' -->
+                            <a href="#about" class="text-primary-text hover:text-sharek-green px-3 py-2 rounded-md text-base font-medium inline-flex items-center transition duration-150">
+                                <span>عن الشركة</span>
+                            </a>
+                        
+                        </div>
+
+                        <a href="#services" class="text-primary-text hover:text-sharek-green px-3 py-2 rounded-md text-base font-medium transition duration-150">خدماتنا</a>
+                        <a href="#contact" class="text-white bg-sharek-green hover:bg-sharek-dark px-4 py-2 rounded-full text-base font-medium transition duration-150 shadow-lg">تواصل معنا</a>
+                    </div>
+                </div>
+
+                <!-- زر قائمة الجوال (Hamburger Button) -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-white hover:bg-sharek-green focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sharek-green" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">فتح القائمة الرئيسية</span>
+                        <!-- أيقونة الهمبرغر (Hamberger Icon) -->
+                        <svg id="menu-icon" class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        <!-- أيقونة الإغلاق (Close Icon) -->
+                        <svg id="close-icon" class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- قائمة الجوال (Mobile Menu) -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-primary-text hover:bg-sharek-light hover:text-white">الرئيسية</a>
+                
+                <!-- القائمة المنسدلة للجوال -->
+                <button id="mobile-about-dropdown-toggle" class="w-full text-right block px-3 py-2 rounded-md text-base font-medium text-primary-text hover:bg-sharek-light hover:text-white transition duration-150 focus:outline-none">
+                    عن الشركة
+                </button>
+                <div id="mobile-about-dropdown-menu" class="hidden pl-4 border-r-2 border-sharek-light transition-all duration-300">
+                    <a href="#about" class="mobile-nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-sharek-green hover:text-white transition duration-150 rounded-md">من نحن</a>
+                    <a href="#vision" class="mobile-nav-link block px-3 py-2 text-sm text-gray-700 hover:bg-sharek-green hover:text-white transition duration-150 rounded-md">رؤيتنا</a>
+                </div>
+
+                <a href="#services" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-primary-text hover:bg-sharek-light hover:text-white">خدماتنا</a>
+                <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-white bg-sharek-green hover:bg-sharek-dark mt-2 shadow-lg text-center">تواصل معنا</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. قسم الهيرو (Landing Page) - واجهة جذابة -->
+    <header id="home" class="relative overflow-hidden pt-20">
+        <div class="hero-clip bg-sharek-green text-white py-24 sm:py-32 lg:py-40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between">
+                
+                <!-- المحتوى النصي -->
+                <div class="lg:w-1/2 text-center lg:text-right mb-10 lg:mb-0">
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4">
+                        نحو بنية تحتية مستدامة
+                    </h1>
+                    <p class="text-xl sm:text-2xl font-light mb-8 opacity-90">
+                        الرواد في صناعة المواسير البلاستيكية وملحقاتها في ليبيا بجودة عالمية.
+                    </p>
+                    <a href="#services" class="inline-block bg-sharek-light text-sharek-dark hover:bg-white hover:text-sharek-green transition duration-300 text-lg font-semibold px-8 py-3 rounded-full shadow-xl transform hover:scale-105">
+                        اكتشف خدماتنا
+                        <i class="fas fa-chevron-left mr-2"></i>
+                    </a>
+                </div>
+                
+                <!-- صورة توضيحية (Placeholder) -->
+                <div class="lg:w-1/2 flex justify-center lg:justify-start">
+                    <img class="w-full max-w-lg h-auto rounded-xl shadow-2xl transform rotate-3 transition duration-500 hover:rotate-0" 
+                         src="images/logo.jpg" 
+                         alt="صورة حلول المواسير البلاستيكية">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. قسم "من نحن" (About Us) -->
+    <section id="about" class="py-20 sm:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-semibold text-sharek-green uppercase tracking-wider">القصة والريادة</h2>
+                <p class="mt-2 text-3xl sm:text-4xl font-extrabold text-primary-text">من نحن: جودة تبني المستقبل</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- المحتوى النصي -->
+                <div class="space-y-6 lg:order-2">
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        تأسست شركة الشريك لتكون الاسم الرائد في صناعة حلول الأنابيب البلاستيكية في السوق الليبي. منذ انطلاقنا، التزمنا بتوفير منتجات عالية الجودة مطابقة للمواصفات العالمية، مدفوعين بفريق من الخبراء وباستخدام أحدث التقنيات.
+                    </p>
+                    <p class="text-lg text-gray-600 leading-relaxed border-r-4 border-sharek-green pr-4 bg-gray-50 p-4 rounded-lg shadow-sm">
+                        نحن لا نبيع المواسير فحسب، بل نقدم حلولاً متكاملة تضمن متانة البنية التحتية وكفاءة شبكات المياه والصرف الصحي والكهرباء. ثقة عملائنا هي أساس نمونا.
+                    </p>
+                    <a href="#services" class="inline-flex items-center text-sharek-green hover:text-sharek-dark font-medium transition duration-150">
+                        استكشف التزامنا بالجودة
+                        <i class="fas fa-arrow-left mr-2"></i>
+                    </a>
+                </div>
+
+                <!-- الرسم البياني/الصورة -->
+                    <div class="flex justify-center lg:order-1">
+                        <div class="relative w-full max-w-md h-96 bg-sharek-light rounded-2xl p-6 custom-shadow transform -rotate-2 flex items-center justify-center overflow-hidden">
+                            <img src="images/ccc.jpg" alt="صورة ccc" class="w-full h-full object-cover rounded-xl shadow-inner" onerror="this.onerror=null;this.src='https://placehold.co/400x384/ffffff/008000?text=ccc';">
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. قسم "رؤيتنا" (Our Vision) -->
+    <section id="vision" class="py-20 sm:py-28 bg-white border-t border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-semibold text-sharek-light uppercase tracking-wider">الطموح نحو المستقبل</h2>
+                <p class="mt-2 text-3xl sm:text-4xl font-extrabold text-primary-text">رؤيتنا: الشريك المفضل في البناء</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- هدف 1: الريادة الإقليمية -->
+                <div class="bg-gray-50 p-6 rounded-xl custom-shadow text-center transform hover:scale-105 transition duration-300">
+                    <i class="fas fa-globe-africa text-5xl text-sharek-green mb-4"></i>
+                    <h3 class="text-xl font-bold text-primary-text mb-3">الريادة الإقليمية</h3>
+                    <p class="text-gray-600">أن نصبح المورد الأول والاسم الموثوق به في حلول المواسير البلاستيكية في منطقة شمال أفريقيا.</p>
+                </div>
+
+                <!-- هدف 2: الابتكار والجودة -->
+                <div class="bg-gray-50 p-6 rounded-xl custom-shadow text-center transform hover:scale-105 transition duration-300">
+                    <i class="fas fa-flask text-5xl text-sharek-green mb-4"></i>
+                    <h3 class="text-xl font-bold text-primary-text mb-3">الابتكار المستمر</h3>
+                    <p class="text-gray-600">الاستثمار في البحث والتطوير لتقديم منتجات جديدة تتوافق مع التطورات البيئية والتكنولوجية.</p>
+                </div>
+
+                <!-- هدف 3: الاستدامة البيئية -->
+                <div class="bg-gray-50 p-6 rounded-xl custom-shadow text-center transform hover:scale-105 transition duration-300">
+                    <i class="fas fa-leaf text-5xl text-sharek-green mb-4"></i>
+                    <h3 class="text-xl font-bold text-primary-text mb-3">الاستدامة والمسؤولية</h3>
+                    <p class="text-gray-600">العمل على تقليل البصمة الكربونية لعملياتنا واستخدام مواد قابلة لإعادة التدوير.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. قسم "خدماتنا" (Services) -->
+    <section id="services" class="py-20 sm:py-28">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-semibold text-sharek-green uppercase tracking-wider">ماذا نقدم؟</h2>
+                <p class="mt-2 text-3xl sm:text-4xl font-extrabold text-primary-text">حلولنا المتكاملة لجميع المشاريع</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- الخدمة 1: تصنيع مواسير PVC و HDPE -->
+                <div class="bg-white rounded-xl custom-shadow overflow-hidden transform transition duration-300 hover:shadow-2xl hover:-translate-y-1">
+                    <div class="p-6">
+                        <i class="fas fa-tools text-5xl text-sharek-light mb-4"></i>
+                        <h3 class="text-xl font-bold text-primary-text mb-3">تصنيع الأنابيب البلاستيكية</h3>
+                        <p class="text-gray-600">ننتج مجموعة واسعة من مواسير PVC و HDPE بأقطار مختلفة لتطبيقات المياه، الصرف الصحي، وخطوط الكابلات. نضمن أعلى معايير الضغط والمتانة.</p>
+                    </div>
+                </div>
+
+                <!-- الخدمة 2: ملحقات ووصلات متكاملة -->
+                <div class="bg-white rounded-xl custom-shadow overflow-hidden transform transition duration-300 hover:shadow-2xl hover:-translate-y-1">
+                    <div class="p-6">
+                        <i class="fas fa-puzzle-piece text-5xl text-sharek-light mb-4"></i>
+                        <h3 class="text-xl font-bold text-primary-text mb-3">ملحقات ووصلات متكاملة</h3>
+                        <p class="text-gray-600">توفير جميع أنواع الملحقات والوصلات (أكواع، تيهات، محابس) التي تلزم لإكمال أي مشروع بنية تحتية، بضمان التوافق التام مع مواسيرنا.</p>
+                    </div>
+                </div>
+
+                <!-- الخدمة 3: حلول التوريد للمشاريع الكبرى -->
+                <div class="bg-white rounded-xl custom-shadow overflow-hidden transform transition duration-300 hover:shadow-2xl hover:-translate-y-1">
+                    <div class="p-6">
+                        <i class="fas fa-truck-moving text-5xl text-sharek-light mb-4"></i>
+                        <h3 class="text-xl font-bold text-primary-text mb-3">خدمات التوريد والدعم اللوجستي</h3>
+                        <p class="text-gray-600">لدينا أسطول لوجستي متخصص لضمان تسليم المنتجات في الوقت المحدد إلى مواقع المشاريع في جميع أنحاء ليبيا.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- المنتجات المميزة (قسم فرعي) -->
+            <div class="mt-16 text-center">
+                <p class="text-2xl font-bold text-primary-text mb-4 border-b pb-2 inline-block border-sharek-green">أنواع المواسير الرئيسية</p>
+                <div class="flex flex-wrap justify-center gap-4 mt-6">
+                    <span class="px-6 py-2 bg-sharek-green text-white rounded-full font-medium shadow-md">مواسير UPVC (للمياه)</span>
+                    <span class="px-6 py-2 bg-gray-200 text-primary-text rounded-full font-medium shadow-md">مواسير HDPE (لضغط عالي)</span>
+                    <span class="px-6 py-2 bg-sharek-green text-white rounded-full font-medium shadow-md">مواسير CPVC (للماء الساخن)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. قسم "اتصل بنا" (Contact Us) - تم حذف نموذج الاتصال -->
+    <section id="contact" class="py-20 sm:py-28 bg-sharek-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-sm font-semibold text-sharek-light uppercase tracking-wider">تواصل معنا اليوم</h2>
+                <p class="mt-2 text-3xl sm:text-4xl font-extrabold">ابنِ مشروعك بثقة مع الشريك</p>
+            </div>
+
+            <!-- معلومات الاتصال (اصبحت هي الجزء الوحيد) -->
+            <div class="flex justify-center">
+                <div class="w-full max-w-lg space-y-8 bg-sharek-green p-8 rounded-xl custom-shadow text-center">
+                    
+                    <div class="space-y-4">
+                        <i class="fas fa-map-marker-alt text-4xl text-white"></i>
+                        <h4 class="text-xl font-bold mb-1">العنوان</h4>
+                        <p class="text-gray-200">ليبيا - بنغازي</p>
+                    </div>
+
+                    <div class="space-y-4 border-t border-gray-600 pt-6">
+                        <i class="fas fa-envelope text-4xl text-white"></i>
+                        <h4 class="text-xl font-bold mb-1">البريد الإلكتروني</h4>
+                        <a href="mailto:info@alsharek.ly" class="text-sharek-light hover:underline text-lg">info@alsharek.ly</a>
+                    </div>
+
+                    <div class="space-y-4 border-t border-gray-600 pt-6">
+                        <i class="fas fa-phone-alt text-4xl text-white"></i>
+                        <h4 class="text-xl font-bold mb-1">الهاتف</h4>
+                        <!-- اجعل رقم الهاتف يعرَض من اليسار إلى اليمين لمنع انعكاس الأرقام داخل صفحة RTL -->
+                        <p dir="ltr" class="text-sharek-light hover:underline cursor-pointer text-lg" style="direction:ltr; unicode-bidi:embed;">+218 94 51 888 51</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. الشريط السفلي (Footer) -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-sm text-gray-400">&copy; <span id="current-year"></span> Alsharek. جميع الحقوق محفوظة.</p>
+            <div class="mt-4 flex justify-center space-x-6 space-x-reverse">
+                <a href="#" class="text-gray-400 hover:text-sharek-light transition duration-150"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-gray-400 hover:text-sharek-light transition duration-150"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-sharek-light transition duration-150"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript للوظائف التفاعلية -->
+    <script>
+        // 1. منطق قائمة الجوال والقائمة المنسدلة
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const mobileAboutDropdownToggle = document.getElementById('mobile-about-dropdown-toggle');
+            const mobileAboutDropdownMenu = document.getElementById('mobile-about-dropdown-menu');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            
+            // فتح/إغلاق قائمة الجوال
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+                
+                if (isExpanded) {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                } else {
+                    mobileMenu.classList.remove('hidden');
+                    menuIcon.classList.add('hidden');
+                    closeIcon.classList.remove('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'true');
+                }
+            });
+
+            // فتح/إغلاق القائمة المنسدلة في الجوال
+            mobileAboutDropdownToggle.addEventListener('click', () => {
+                mobileAboutDropdownMenu.classList.toggle('hidden');
+            });
+            
+            // إغلاق قائمة الجوال عند النقر على رابط
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // 2. تحديث السنة في الشريط السفلي
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+</html>
